@@ -254,13 +254,13 @@ public interface UserClient {
 
 Feign 可以支持很多的自定义配置，如下表所示：
 
-| 类型                   | 作用             | 说明                                                   |
-| ---------------------- | ---------------- | ------------------------------------------------------ |
-| **feign.Logger.Level** | 修改日志级别     | 包含四种不同的级别：NONE、BASIC、HEADERS、FULL         |
+| 类型                     | 作用       | 说明                                |
+| ---------------------- | -------- | --------------------------------- |
+| **feign.Logger.Level** | 修改日志级别   | 包含四种不同的级别：NONE、BASIC、HEADERS、FULL |
 | feign.codec.Decoder    | 响应结果的解析器 | http远程调用的结果做解析，例如解析json字符串为java对象 |
-| feign.codec.Encoder    | 请求参数编码     | 将请求参数编码，便于通过http请求发送                   |
-| feign.Contract         | 支持的注解格式   | 默认是SpringMVC的注解                                  |
-| feign.Retryer          | 失败重试机制     | 请求失败的重试机制，默认是没有，不过会使用Ribbon的重试 |
+| feign.codec.Encoder    | 请求参数编码   | 将请求参数编码，便于通过http请求发送              |
+| feign.Contract         | 支持的注解格式  | 默认是SpringMVC的注解                   |
+| feign.Retryer          | 失败重试机制   | 请求失败的重试机制，默认是没有，不过会使用Ribbon的重试    |
 
 一般情况下，默认值就能满足我们使用，如果要自定义时，只需要创建自定义的 `@Bean` 覆盖默认 Bean 即可。
 

@@ -35,6 +35,18 @@ docker run -d \
 > 1.给容器添加了所有的capabilities         
 > 2.允许容器访问主机的所有设备
 
+### Docker 部署 Neo4j
+
+```shell
+docker run \
+    --restart=always \
+    --name neo4j \
+    -p 7474:7474 \
+    -p 7687:7687 \
+    -v neo4j_data:/data \
+    -d neo4j:4.4.5
+```
+
 ## Docker 部署 消息队列
 
 ### Docker 部署 RabbitMQ
