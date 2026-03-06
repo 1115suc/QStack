@@ -210,6 +210,48 @@ docker run -p 9000:9000 \
        server /data
 ```
 
+### Docker 部署 Nacos
+
+1. 拉去 Nacos 镜像
+
+```shell
+docker pull nacos/nacos-server:v2.3.1
+```
+
+2. 创建 Nacos 的文件夹
+
+```shell
+docker cp nacos:/home/nacos/logs/ /mydata/nacos/
+docker cp nacos:/home/nacos/conf/ /mydata/nacos/
+```
+
+3. 在 MySQL 中创建 Nacos 的表
+
+4. 启动 Nacos
+
+```shell
+docker run -d \
+  --name nacos \
+  -p 192.168.150.128:8848:8848 \
+  -p 192.168.150.128:9848:9848 \
+  -p 192.168.150.128:9849:9849 \
+  --privileged=true \
+  -e JVM_XMS=256m \
+  -e JVM_XMX=256m \
+  -e MODE=standalone \
+  -e SPRING_DATASOURCE_PLATFORM=mysql \
+  -e MYSQL_SERVICE_HOST=192.168.150.128 \
+  -e MYSQL_SERVICE_PORT=3306 \
+  -e MYSQL_SERVICE_DB_NAME=nacos \
+  -e MYSQL_SERVICE_USER=root \
+  -e MYSQL_SERVICE_PASSWORD=24364726 \
+  -v /SuChan/docker/volume/nacos/logs/:/home/nacos/logs \
+  -v /SuChan/docker/volume/nacos/conf/:/home/nacos/conf \
+  --restart=always \
+  nacos/nacos-server:v2.3.1
+```
+
+5. 访问 http://192.168.150.128:8848/nacos
 
 ### Docker 部署 Sentinel
 ```shell
