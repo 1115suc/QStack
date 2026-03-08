@@ -190,10 +190,10 @@ docker run -d \
 ### Docker 部署 xxl-job-admin (需要创建数据库 xxl_job)
 ```shell
 docker run -d \
-      -e PARAMS="--spring.datasource.url=jdbc:mysql://192.168.88.128:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC --spring.datasource.username=root --spring.datasource.password=24364726" 
-      -p 8093:8080  
-      -v xxldata:/data/applogs 
-      --name=xxl-job-admin 
+      -e PARAMS="--spring.datasource.url=jdbc:mysql://192.168.150.128:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC --spring.datasource.username=root --spring.datasource.password=24364726" \
+      -p 8090:8080  \
+      -v xxldata:/data/applogs \
+      --name=xxl-job-admin \
       xuxueli/xxl-job-admin:2.3.0
 ```
 
