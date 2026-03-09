@@ -1,0 +1,461 @@
+# JUC 并发编程
+
+## 一、基础概念回顾
+
+### 1.1 JUC 简介
+- java.util.concurrent 包
+- Java 并发编程工具类集合
+
+### 1.2 核心概念
+| 概念 | 定义 | 特点 |
+|------|------|------|
+| 进程 | 独立运行的应用程序，资源分配基本单位 | - |
+| 线程 | 进程中的执行单元，CPU 调度基本单位 | - |
+| 并行 | 同时做不同的事，占有不同资源 | 硬件角度 |
+| 并发 | 多个线程争抢同一资源 | 应用角度 |
+| 同步 | 多线程按顺序执行（串行） | - |
+| 异步 | 多线程同时执行 | - |
+
+### 1.3 线程状态
+- NEW：创建
+- RUNNABLE：就绪和运行
+- BLOCKED：阻塞（未争抢到资源）
+- WAITING：无限等待（wait()）
+- TIMED_WAITING：有限等待（sleep()）
+- TERMINATED：终止
+
+### 1.4 线程创建方式
+1. 继承 Thread 类
+2. 实现 Runnable 接口
+   - 实现类方式
+   - 匿名内部类
+   - Lambda 表达式
+3. 实现 Callable 接口
+4. 使用线程池
+
+### 1.5 synchronized 关键字
+**特性**：排他性、可重入性
+
+**锁规则**：
+- 非静态方法：锁 this
+- 静态方法：锁 class
+- 同步代码块：synchronized(锁对象){}
+
+**8 锁问题核心**：几把锁？锁什么？
+
+---
+
+## 二、Lock 锁体系
+
+### 2.1 ReentrantLock（可重入锁）
+
+**特性**：
+- ✅ 排他性（独占锁）
+- ✅ 可重入性
+- ✅ 支持公平/非公平锁
+- ✅ tryLock 立即返回
+- ✅ tryLock(time) 限时获取
+
+**对比 synchronized**：
+| 特性 | synchronized | ReentrantLock |
+|------|-------------|---------------|
+| 锁类型 | JVM 层面 | API 层面 |
+| 公平锁 | ❌ | ✅ |
+| tryLock | ❌ | ✅ |
+| 中断响应 | ❌ | ✅ |
+| 条件变量 | 单一 | 多个 Condition |
+
+### 2.2 ReentrantReadWriteLock（读写锁）
+
+**并发规则**：
+1. 写写互斥 ❌
+2. 读写互斥 ❌
+3. 读读并发 ✅
+
+**锁降级模式**（⚠️ 只有降级，没有升级）：
+
+```
+java
+// 标准锁降级模板
+updateMethod() {
+writeLock.lock();
+try {
+// 1. 写操作
+write();
+
+        // 2. 加读锁（关键步骤）
+        readLock.lock();
+        
+        // 3. 释放写锁
+        writeLock.unlock();
+        
+        // 4. 读操作（保证数据一致性）
+        read();
+    } finally {
+        readLock.unlock();
+    }
+}
+```
+**应用场景**：读多写少的缓存场景
+
+**可重入规则**：
+- ✅ 写锁嵌套读锁
+- ✅ 写锁嵌套写锁
+- ✅ 读锁嵌套读锁
+- ❌ 读锁嵌套写锁（会死锁）
+
+---
+
+## 三、线程间通信
+
+### 3.1 经典面试题
+> 两个线程，一个打印 1-52，另一个打印 A-Z，输出：12A34B...5152Z
+
+### 3.2 编程模板
+```
+java
+// 三步走策略
+1. 高内聚低耦合（线程操作资源类）
+2. 判断 → 干活 → 通知
+3. 避免虚假唤醒（while 代替 if）
+```
+### 3.3 通信方式对比
+
+| 方式 | 同步机制 | 等待方法 | 通知方法 | 特点 |
+|------|---------|---------|---------|------|
+| 方式一 | synchronized | wait() | notify()/notifyAll() | JVM 内置 |
+| 方式二 | ReentrantLock | await() | signal()/signalAll() | 更灵活 |
+
+**代码示例**：
+```
+java
+// ReentrantLock + Condition
+class Data {
+private int number = 1;
+private Lock lock = new ReentrantLock();
+private Condition c1 = lock.newCondition();
+private Condition c2 = lock.newCondition();
+
+    public void method1() {
+        lock.lock();
+        try {
+            while (number != 1) { c1.await(); }
+            // 干活
+            number = 2;
+            // 通知
+            c2.signal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+```
+---
+
+## 四、并发容器类
+
+### 4.1 List 体系
+| 类名 | 线程安全 | 特点 | 扩容倍数 | 适用场景 |
+|------|---------|------|---------|---------|
+| ArrayList | ❌ | 高效 | 1.5 倍 | 单线程 |
+| Vector | ✅ | 低效（全锁） | 2 倍 | 已过时 |
+| SynchronizedList | ✅ | 包装型 | 1.5 倍 | 简单场景 |
+| **CopyOnWriteArrayList** | ✅ | 写时复制，读写分离 | - | **读多写少** |
+
+### 4.2 Set 体系
+| 类名 | 线程安全 | 底层实现 | 特点 |
+|------|---------|---------|------|
+| HashSet | ❌ | HashMap | - |
+| SynchronizedSet | ✅ | 包装 HashSet | 迭代不安全 |
+| **CopyOnWriteArraySet** | ✅ | CopyOnWriteArrayList | 读多写少 |
+
+### 4.3 Map 体系
+| 类名 | 线程安全 | 实现原理 | 性能 |
+|------|---------|---------|------|
+| HashMap | ❌ | 数组 + 链表 + 红黑树 | 高 |
+| Hashtable | ✅ | 全表锁 | 低 |
+| SynchronizedMap | ✅ | 包装 HashMap | 中 |
+| **ConcurrentHashMap** | ✅ | JDK7: Segment<br>JDK8: CAS+synchronized | **最高** |
+
+**ConcurrentHashMap 演进**：
+- JDK7：Segment 分段锁（二级哈希）
+- JDK8：Node 数组 + 链表 + 红黑树，锁粒度更细
+
+---
+
+## 五、辅助类（AQS 三大金刚）
+
+### 5.1 CountDownLatch（倒计数器）
+
+```
+java
+CountDownLatch latch = new CountDownLatch(N);
+latch.countDown();  // 计数减 1
+latch.await();      // 阻塞至计数为 0
+```
+**应用场景**：
+- 等待 N 个子任务完成
+- 拆分计算任务
+
+**vs join()**：更灵活，可设置超时
+
+### 5.2 CyclicBarrier（循环栅栏）
+
+```
+java
+CyclicBarrier barrier = new CyclicBarrier(N, () -> {
+// 所有线程到达后执行
+});
+barrier.await();  // 在屏障点阻塞
+```
+**特点**：
+- 可重复使用（循环）
+- 支持屏障动作
+- 适用于多线程协同计算
+
+### 5.3 Semaphore（信号量）
+
+```
+java
+Semaphore semaphore = new Semaphore(N);
+semaphore.acquire();   // 获取许可（阻塞）
+semaphore.release();   // 释放许可
+```
+**应用场景**：
+- 限流（控制并发访问数）
+- 资源池管理
+
+---
+
+## 六、Callable 与 Future
+
+### 6.1 创建方式对比
+
+| 接口 | 方法 | 返回值 | 异常 | 线程创建 |
+|------|------|-------|------|---------|
+| Runnable | run() | void | 不抛出 | new Thread(runnable) |
+| Callable | call() | V | 抛出 | FutureTask + Thread |
+
+```
+java
+// Callable 标准用法
+FutureTask<T> task = new FutureTask<>(() -> {
+return result;
+});
+new Thread(task).start();
+T result = task.get();  // 阻塞获取结果
+```
+### 6.2 FutureTask 特性
+- ✅ get() 阻塞获取结果
+- ✅ 单个 task：call 只执行一次（适合缓存）
+- ✅ 多个 task：call 多次执行（适合分布式计算）
+
+### 6.3 Callable 应用场景
+1. 异步计算
+2. 多线程缓存
+3. 异常处理（可抛出异常）
+4. 任务状态查询（isDone）
+5. 取消任务（cancel）
+
+---
+
+## 七、阻塞队列（BlockingQueue）
+
+### 7.1 什么是阻塞队列
+- 队满入队 → 阻塞
+- 队空出队 → 阻塞
+
+### 7.2 方法对比
+
+| 类型 | 入队 | 出队 | 检查队首 |
+|------|------|------|---------|
+| 抛异常 | add() | remove() | element() |
+| 特殊值 | offer() | poll() | peek() |
+| 阻塞 | put() | take() | - |
+| 超时 | offer(t) | poll(t) | - |
+
+### 7.3 常见实现类
+
+| 类名 | 类型 | 特点 | 应用 |
+|------|------|------|------|
+| ArrayBlockingQueue | 有界 | 数组结构 | 固定容量 |
+| LinkedBlockingQueue | 无界 | 链表结构 | 默认 Integer.MAX_VALUE |
+| SynchronousQueue | 不存储 | 直接传递 | 线程池 |
+| DelayedWorkQueue | 延迟 | 定时任务 | 定时线程池 |
+
+### 7.4 典型应用
+- 生产者 - 消费者模式
+- 线程池工作队列
+
+---
+
+## 八、线程池（重点⭐）
+
+### 8.1 四种工厂方法（⚠️ 不推荐）
+
+| 方法 | 特点 | 风险 |
+|------|------|------|
+| newSingleThreadExecutor | 单线程 | OOM |
+| newFixedThreadPool(n) | 固定线程数 | OOM |
+| newCachedThreadPool | 无限线程 | OOM |
+| newScheduledThreadPool | 定时任务 | OOM |
+
+**最佳实践**：使用 ThreadPoolExecutor 自定义
+
+### 8.2 线程池工作流程
+
+```
+
+新任务 → 核心线程空闲？→ 是：创建核心线程执行
+↓ 否
+队列满？→ 否：加入队列等待
+↓ 是
+最大线程空闲？→ 是：创建非核心线程执行
+↓ 否
+触发拒绝策略
+```
+### 8.3 自定义线程池（7 大参数）
+
+```
+java
+ThreadPoolExecutor executor = new ThreadPoolExecutor(
+2,                              // corePoolSize: 核心线程数
+5,                              // maximumPoolSize: 最大线程数
+60,                             // keepAliveTime: 存活时间
+TimeUnit.SECONDS,               // unit: 时间单位
+new ArrayBlockingQueue<>(3),    // workQueue: 有界队列
+Executors.defaultThreadFactory(),// threadFactory: 工厂
+new AbortPolicy()               // handler: 拒绝策略
+);
+```
+**四大拒绝策略**：
+1. **AbortPolicy**：丢弃任务 + 抛异常（默认）
+2. **CallerRunsPolicy**：调用者线程执行
+3. **DiscardOldestPolicy**：抛弃最老任务
+4. **DiscardPolicy**：直接丢弃（不抛异常）
+
+### 8.4 execute vs submit
+
+| 方法 | 参数 | 返回值 | 异常处理 |
+|------|------|-------|---------|
+| execute() | Runnable | void | 直接抛出 |
+| submit() | Runnable/Callable | Future<?> | 封装在 Future 中 |
+
+### 8.5 线程池优势
+- ✅ 复用线程，减少创建销毁开销
+- ✅ 队列缓冲任务
+- ✅ 统一管理生命周期
+- ✅ 可控参数调优
+
+---
+
+## 九、JMM 与并发底层原理
+
+### 9.1 JMM（Java Memory Model）
+
+**三大特性**：
+1. **可见性**：多线程读取共享变量值一致
+2. **有序性**：指令执行顺序符合预期（禁止指令重排序）
+3. **原子性**：操作不可分割，不受并发干扰
+
+### 9.2 volatile 关键字
+
+**作用**：
+- ✅ 保证可见性（通过内存屏障）
+- ✅ 保证有序性（禁止指令重排）
+- ❌ 不保证原子性
+
+**应用场景**：
+- 状态标记位
+- 双重检查锁定（DCL）单例
+
+### 9.3 CAS（Compare And Swap）
+
+**原理**：比较并交换
+```
+
+预期值 == 内存值 → 更新为新值
+预期值 != 内存值 → 不更新（自旋重试）
+```
+**底层实现**：
+- Unsafe 类（Native 方法）
+- atomic 包（基于 CAS）
+
+**atomic 包分类**：
+- 基本类型：AtomicInteger、AtomicLong、AtomicBoolean
+- 数组：AtomicIntArray、AtomicLongArray
+- 引用：AtomicReference
+- 字段更新器：AtomicReferenceFieldUpdater
+
+**注意**：atomic 只保证变量修改原子性，代码块原子性需加锁
+
+### 9.4 自旋锁
+
+**原理**：循环尝试获取锁，直到成功
+
+**应用场景**：
+- 锁竞争不激烈
+- 占用时间短
+
+**典型实现**：
+- AtomicXXX 的 CAS 自旋
+- ReentrantLock 的 tryLock 自旋
+
+### 9.5 JMM 特性保障方案
+
+| 特性 | 保障方案 |
+|------|---------|
+| 可见性 | volatile、synchronized、Lock |
+| 有序性 | volatile、synchronized、Lock |
+| 原子性 | atomic（变量）、synchronized/Lock（代码块） |
+
+### 9.6 AQS（AbstractQueuedSynchronizer）
+
+**核心机制**：
+```
+java
+state 字段：
+- state = 0：锁空闲
+- state = 1：锁被占用
+- state > 1：锁重入
+```
+**工作原理**：
+1. CAS 尝试修改 state
+2. 失败则进入 FIFO 队列等待
+3. 前驱节点释放锁后唤醒后继
+
+**公平锁 vs 非公平锁**：
+- 公平：严格按 FIFO 顺序
+- 非公平：允许插队（性能更好）
+
+**基于 AQS 的组件**：
+- ReentrantLock
+- CountDownLatch
+- Semaphore
+- CyclicBarrier
+
+---
+
+## 十、面试高频考点总结
+
+### 10.1 必背知识点
+1. ConcurrentHashMap 的 JDK7/8 区别
+2. 线程池 7 大参数及工作流程
+3. volatile 的作用和原理
+4. CAS 原理和 ABA 问题
+5. AQS 原理
+6. 线程间通信两种方式
+7. 各种锁的特点（ReentrantLock、读写锁）
+
+### 10.2 手写代码题
+1. 线程安全的单例模式（DCL+volatile）
+2. 三个线程轮流打印 ABC
+3. 自定义线程池参数
+4. CountDownLatch/CyclicBarrier 使用
+
+### 10.3 调优经验
+- 线程池参数配置（CPU 密集型 vs IO 密集型）
+- 拒绝策略选择
+- 并发容器选型
