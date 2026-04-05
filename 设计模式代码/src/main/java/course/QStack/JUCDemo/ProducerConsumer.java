@@ -1,0 +1,93 @@
+package course.QStack.JUCDemo;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class ProducerConsumer {
+    private static int flag = 1;
+
+    private static Lock lock = new ReentrantLock();
+    
+    private static Condition condition1 = lock.newCondition();
+    private static Condition condition2 = lock.newCondition();
+    private static Condition condition3 = lock.newCondition();
+    
+    private void producePrintA() {
+        lock.lock();
+        
+        try {
+            while (flag != 1) {
+                condition1.await();
+            }
+
+            for (int i = 0; i < 5; i++) {
+                System.out.println(Thread.currentThread().getName() + "," + i);
+            }
+            
+            flag = 2;
+            condition2.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+    
+    private void producePrintB() { 
+        lock.lock();
+        try { 
+            while (flag != 2) {
+                condition2.await();
+            }
+            
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Thread.currentThread().getName() + "," + i);
+            }
+            
+            flag = 3;
+            condition3.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+    
+    private void producePrintC() {
+        lock.lock();
+        try {
+            while (flag != 3) {
+                condition3.await();
+            }
+                
+            for (int i = 0; i < 15; i++) {
+                System.out.println(Thread.currentThread().getName() + "," + i);
+            }
+            
+            flag = 1;
+            condition1.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+    
+    public static void main(String[] args) { 
+        ProducerConsumer pc = new ProducerConsumer();
+        for (int i = 0; i < 3; i++) {
+            new Thread(() -> {
+                pc.producePrintA();
+            }, "A").start();
+
+            new Thread(() -> {
+                pc.producePrintB();
+            }, "B").start();
+
+            new Thread(() -> {
+                pc.producePrintC();
+            }, "C").start();
+        }
+    }
+}
