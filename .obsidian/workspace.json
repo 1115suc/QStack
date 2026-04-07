@@ -1,0 +1,221 @@
+{
+  "main": {
+    "id": "1b4966bf40565f63",
+    "type": "split",
+    "children": [
+      {
+        "id": "4475e53f18ca3030",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "64401704b97f10b0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "web后端/Java/JUC/02.JUC.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02.JUC"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "61bde130db94df42",
+    "type": "split",
+    "children": [
+      {
+        "id": "f442d8640072c66b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f2398e766f035e2b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "72d10f23f9fcaa95",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "a009342f69aadbcc",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "303506c713a5e72e",
+    "type": "split",
+    "children": [
+      {
+        "id": "e9c1f475bbde9cc4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "317c2afee2377ac5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "web后端/中间件/04.Docker/03.Docker部署各容器.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "03.Docker部署各容器 的反向链接列表"
+            }
+          },
+          {
+            "id": "ac7dee6cabbcdb12",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "web后端/中间件/04.Docker/03.Docker部署各容器.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "03.Docker部署各容器 的出链列表"
+            }
+          },
+          {
+            "id": "85761de221b0e407",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "a23337cd0da9aff1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "a8e18f6cf349e800",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "web后端/Java/JUC/02.JUC.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "02.JUC 的大纲"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "64401704b97f10b0",
+  "lastOpenFiles": [
+    "设计模式代码/target/classes/course/QStack/JUCDemo/CallableDemo.class",
+    "设计模式代码/target/classes/course/QStack/JUCDemo/MyCallableThread.class",
+    "设计模式代码/target/classes/course/QStack/JUCDemo/MyRunnableThread.class",
+    "设计模式代码/src/main/java/course/QStack/JUCDemo/CallableDemo.java",
+    "web后端/Java/JUC/01.JUC.md",
+    "设计模式代码/target/classes/course/QStack/JUCDemo/ProducerConsumer.class",
+    "设计模式代码/src/main/java/course/QStack/JUCDemo/ProducerConsumer.java",
+    "web后端/Java/JUC/03.JUC.md",
+    "web后端/Java/JUC/02.JUC.md",
+    "web后端/Java/JUC/生产者消费者问题.md",
+    "web后端/Java/JUC/07.Semaphore.md",
+    "web后端/Java/JUC/06.CyclicBarrier.md",
+    "web后端/Java/JUC/05.CountDownLatch.md",
+    "设计模式代码/target/classes/course/QStack/DesignPatterns/FactoryPattern/AbstractFactory/service/Automobile.class",
+    "设计模式代码/target/classes/course/QStack/DesignPatterns/FactoryPattern/AbstractFactory/service/Bicycle.class",
+    "设计模式代码/target/classes/course/QStack/DesignPatterns/FactoryPattern/AbstractFactory/service",
+    "设计模式代码/target/classes/course/QStack/JUCDemo/CountDownLatchDemo.class",
+    "设计模式代码/target/classes/course/QStack/JUCDemo",
+    "web前端/04.Vue/04.Vue 组件.md",
+    "web前端/04.Vue/01.Vue 基础.md",
+    "web前端/08.Pinia/Pinia.md",
+    "web前端/07.NodeJS/01.nvm.md",
+    "web前端/05.Electron/Electron基础.md",
+    "web前端/06.React/React基础.md",
+    "web前端/03.JavaScript/02.JavaScript.md",
+    "web前端/03.JavaScript/04.JavaScript进阶.md",
+    "web前端/03.JavaScript/03.JavaScript进阶.md",
+    "web前端/04.Vue/06.Vue3 基础.md",
+    "web前端/04.Vue/05.Vuex 基础.md",
+    "web前端/04.Vue/03.Vue 生命周期.md",
+    "web前端/04.Vue/02.Vue 基础进阶.md",
+    "web后端/中间件/04.Docker/03.Docker部署各容器.md"
+  ]
+}
