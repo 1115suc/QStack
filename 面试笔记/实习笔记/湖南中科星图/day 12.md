@@ -1,0 +1,4 @@
+- 学习了一下关于 PostgreSQL 的索引相关知识，类比 MySQL 的 B+ 树索引，PostgreSQL 使用 B- 树索引，叶子节点间没有了链表相连接。
+- PostgreSQL 的 GIS 空间索引按照类型设置，一种 Geometry，另一种 Geography 按照需求设置相应结构的索引，防止 PostgreSQL 引擎查询时使用类型转化函数导致索引失效问题。
+- 后面看一下 PostgreSQL 类比 MySQL 索引相关的知识，看 MyBatis 源码。
+- 周末准备一下暑期实习简历
