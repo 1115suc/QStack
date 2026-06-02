@@ -1,240 +1,204 @@
-# QStack 全栈学习笔记
+# QStack
 
-## 项目概述
+QStack 是一个以 Obsidian Markdown 组织的全栈开发学习笔记库，内容覆盖 Java 后端、Web 前端、Python / AI Agent、业务开发实践与面试复习。仓库更偏向知识库和长期沉淀，不是单一可运行项目。
 
-QStack 是一个专注于全栈开发技术学习的个人笔记集合，旨在为开发者提供系统化、实用的技术学习资源。项目采用 Obsidian Markdown 笔记格式组织，内容涵盖从 Java 后端、Python 后端、Web 前端到业务开发实践的全链路技术体系，包含理论知识、实践经验和项目案例，是开发者系统化学习全栈技术栈的综合参考资料。
+## 内容概览
+
+| 模块 | 说明 | 笔记数量 |
+| --- | --- | ---: |
+| `web后端` | Java、数据库、Spring 体系、工具框架、中间件、设计模式与示例代码 | 146 |
+| `web前端` | HTML、CSS、JavaScript、TypeScript、Node.js、Vue、React、Electron、Uniapp 与前端工具链 | 32 |
+| `python` | Python 基础环境、Miniconda / uv、FastAPI / Flask、AI Agent、RAG、LangGraph、MCP 等 | 29 |
+| `业务开发` | 支付服务、缓存服务、多数据源、Starter 开发、前端工程化、AI 工具使用 | 7 |
+| `面试笔记` | Java、MySQL、实习经历与面试复盘 | 42 |
 
 ## 目录结构
 
-```
+```text
 QStack/
-├── web后端/          # Java 后端技术体系（核心）
-│   ├── 01.Java/      # Java 基础与进阶
-│   ├── 02.数据库/    # 关系型与非关系型数据库
-│   ├── 03.Spring框架/# Spring 全家桶
-│   ├── 04.工具框架/  # 开发工具与中间件框架
-│   ├── 05.中间件/    # 企业级中间件
-│   └── 06.设计模式/  # GoF 设计模式
-├── web前端/          # 前端技术体系
-│   ├── 01.HTML/      # HTML 基础
-│   ├── 02.CSS/       # CSS 与 Less
-│   ├── 03.JavaScript/# JavaScript 基础与进阶
-│   ├── 04.TypeScript/# TypeScript
-│   ├── 05.NodeJS/    # Node.js 环境
-│   ├── 06.Vue/       # Vue 2/3 生态
-│   ├── 07.React/     # React 框架
-│   ├── 08.Electron/  # Electron 桌面开发
-│   ├── 09.Uniapp/    # Uniapp 跨端开发
-│   └── 10.其他框架/  # 前端工具链
-├── python/           # Python 后端技术
-│   ├── 框架/         # FastAPI、Flask
-│   └── 中间件/       # Python 环境管理
-└── 业务开发/         # 业务场景实战
-    ├── 支付服务/
-    ├── 缓存服务/
-    ├── MyBatis 操作多数据库/
-    └── Spring-Boot-Start 开发/
+├── web后端/
+│   ├── 01.Java/
+│   │   ├── JUC/
+│   │   ├── JVM/
+│   │   ├── IO流/
+│   │   ├── JavaAPI/
+│   │   ├── JDK新特性/
+│   │   ├── 反射与注解/
+│   │   ├── 多线程/
+│   │   └── 集合/
+│   ├── 02.数据库/
+│   │   ├── 01.Mysql/
+│   │   ├── 02.Redis/
+│   │   ├── 03.MongoDB/
+│   │   ├── 04.Neo4j/
+│   │   ├── 05.ElasticSearch/
+│   │   └── 06.PostgreSQL/
+│   ├── 03.Spring框架/
+│   │   ├── 01.Spring/
+│   │   ├── 02.SpringMVC/
+│   │   ├── 03.SpringBoot/
+│   │   ├── 04.SpringCloud/
+│   │   ├── 05.SpringSecurity/
+│   │   ├── 06.SpringCache/
+│   │   ├── 07.SpringEmail/
+│   │   ├── 08.SpringTest/
+│   │   ├── 09.SpringAi/
+│   │   └── 10.LangChain4j/
+│   ├── 04.工具框架/
+│   ├── 05.中间件/
+│   ├── 06.设计模式/
+│   └── 设计模式代码/
+├── web前端/
+│   ├── 01.HTML/
+│   ├── 02.CSS/
+│   ├── 03.JavaScript/
+│   ├── 04.TypeScript/
+│   ├── 05.NodeJS/
+│   ├── 06.Vue/
+│   ├── 07.React/
+│   ├── 08.Electron/
+│   ├── 09.Uniapp/
+│   └── 10.其他框架/
+├── python/
+│   ├── Agent/
+│   ├── python/
+│   └── 中间件/
+├── 业务开发/
+│   ├── AI 工具使用/
+│   ├── MyBatis 操作多数据库/
+│   ├── Spring-Boot-Start 开发/
+│   ├── 前端工程化/
+│   ├── 支付服务/
+│   └── 缓存服务/
+└── 面试笔记/
+    ├── 01.Java篇/
+    ├── 02.MySQL/
+    └── 实习笔记/
 ```
 
----
+## 核心模块
 
-## 一、web后端 —— Java 技术体系
+### Web 后端
 
-### 1.1 Java 基础
+`web后端` 是当前笔记库中内容最多的部分，主要围绕 Java 后端开发体系展开。
 
-覆盖 Java 核心知识点，深入底层原理：
+- Java 基础与进阶：集合、IO、反射、注解、多线程、JUC、JVM、JDK 新特性。
+- 数据库：MySQL、Redis、MongoDB、Neo4j、ElasticSearch、PostgreSQL。
+- Spring 生态：Spring、SpringMVC、SpringBoot、SpringCloud、SpringSecurity、SpringCache、SpringEmail、SpringTest、Spring AI、LangChain4j。
+- 工具框架：MyBatis、Netty、Swagger / Knife4j、EasyExcel、ShardingSphere-JDBC、Caffeine、Druid、FreeMarker、DataX、EagleMap。
+- 中间件：Maven、Git、Linux、Docker、RabbitMQ、Kafka、Zookeeper、Dubbo、MinIO、XXL-JOB、Nginx、RocketMQ。
+- 设计模式：23 种 GoF 设计模式笔记，以及独立的 `设计模式代码` Maven 示例工程。
 
-| 模块 | 内容 | 说明 |
-|------|------|------|
-| **JUC** | 并发编程、锁机制、AQS、线程池、CountDownLatch、CyclicBarrier、Semaphore、生产者消费者问题 | 7 篇笔记系统讲解 Java 并发核心 |
-| **JVM** | 类加载机制、运行时数据区、垃圾收集器、JVM 指令、双亲委派模型 | 3 篇笔记深入 JVM 底层原理 |
-| **多线程** | 线程模型、线程池原理与配置 | 图解辅助理解 |
-| **集合** | Collection、Map 体系结构与源码分析 | 容器类全面梳理 |
-| **反射与注解** | 反射机制、自定义注解及应用场景 | 框架底层必备 |
-| **IO流** | 字节流、字符流、NIO 基础 | IO 模型全覆盖 |
-| **JavaAPI** | 常用 API 与工具类 | 开发常用速查 |
-| **JDK新特性** | Lambda、Stream、模块化等新版本特性 | 紧跟 JDK 演进 |
+### Web 前端
 
-### 1.2 数据库
+`web前端` 按前端学习路径组织，适合从基础语法到框架实践逐步学习。
 
-涵盖 6 种主流数据库，从基础到高级完整覆盖：
+- 基础三件套：HTML、CSS、JavaScript。
+- 类型与运行环境：TypeScript、Node.js、nvm。
+- 主流框架：Vue、React。
+- 跨端与桌面：Uniapp、Electron。
+- 工具链：ESLint、Vite、Element Plus、Axios。
 
-| 数据库 | 知识点 | 笔记数量 |
-|--------|--------|----------|
-| **MySQL** | 基础语法、高级查询、事务隔离级别、索引优化 | 4 篇（含丰富图解） |
-| **Redis** | 数据结构、持久化、主从哨兵、集群、高级特性 | 3 篇（含配置模板） |
-| **MongoDB** | 基础操作、高级特性、项目集成实践 | 3 篇 |
-| **Neo4j** | 图数据库基础与应用 | 3 篇 |
-| **ElasticSearch** | 基础入门、进阶操作、高级特性、总结 | 4 篇体系化学习 |
-| **PostgreSQL** | 基础使用、高级功能、PostGIS 空间数据与项目集成 | 5 篇 |
+### Python 与 AI Agent
 
-### 1.3 Spring 框架
+`python` 模块包含 Python 环境管理和 AI 应用开发相关内容。
 
-Spring 全家桶全覆盖，从核心到生态：
+- Python 环境：pip 镜像源、Miniconda、uv。
+- Agent 方向：RAG 工程、Agent 工程、LangGraph、MCP 与工具协议、工程化部署与可观测性、项目实战与面试。
 
-| 框架 | 内容 | 笔记数量 |
-|------|------|----------|
-| **Spring** | IOC 容器、AOP 编程（基础+进阶）、声明式事务 | 5 篇层层递进 |
-| **SpringMVC** | 基础用法与进阶配置 | 2 篇 |
-| **SpringBoot** | 基础入门与进阶实战 | 2 篇 |
-| **SpringCloud** | 微服务基础、高级特性、Eureka 注册中心、Ribbon 负载均衡、Sentinel 服务保护、Seata 分布式事务 | 7 篇（含快速集成指南） |
-| **SpringSecurity** | 安全框架基础、JWT 认证、项目集成实战 | 3 篇 |
-| **SpringCache** | 缓存抽象基础、多级缓存架构、项目集成 | 3 篇 |
-| **SpringEmail** | 邮件发送集成 | 1 篇 |
-| **SpringTest** | 单元测试与集成测试 | 1 篇 |
-| **SpringAi** | AI 集成实战 | 1 篇 |
-| **LangChain4j** | LLM 应用开发框架 | 2 篇 |
+### 业务开发
 
-### 1.4 工具框架
+`业务开发` 聚焦真实开发场景中的方案整理和落地实践。
 
-企业级开发必备工具与框架：
+- 支付服务
+- 缓存服务
+- MyBatis 多数据源
+- SpringBoot Starter 开发
+- 前端工程化初始化
+- Claude Code / Codex 等 AI 工具使用
 
-| 工具 | 内容 | 笔记数量 |
-|------|------|----------|
-| **MyBatis** | ORM 基础与 MyBatis-Plus 增强 | 2 篇 |
-| **Netty** | NIO 基础（2篇）、Netty 核心（2篇）、优化与源码、项目集成 | 6 篇系统深入 |
-| **接口管理** | Swagger2、Swagger3、Knife4j | 3 篇 |
-| **EasyExcel** | Excel 导入导出 | 1 篇 |
-| **ShardingSphere-JDBC** | 分库分表、使用指南、项目快速集成 | 4 篇 |
-| **CaffeineCache** | 本地缓存、项目快速集成 | 2 篇 |
-| **Druid** | 数据库连接池 | 1 篇 |
-| **FreeMarker** | 模板引擎 | 1 篇 |
-| **DataX** | 数据同步工具 | 1 篇 |
-| **EagleMap** | 地图服务集成 | 1 篇 |
+### 面试笔记
 
-### 1.5 中间件
+`面试笔记` 用于沉淀面试高频知识点、实习记录和复盘材料，当前包含 Java、MySQL 与实习笔记相关内容。
 
-企业级中间件全覆盖：
+## 推荐学习路线
 
-| 中间件 | 内容 | 笔记数量 |
-|--------|------|----------|
-| **Maven** | 安装配置、依赖管理、常见问题 | 3 篇 |
-| **Git** | 版本控制基础与协作 | 1 篇 |
-| **Linux** | 基础操作、JDK 部署实战 | 2 篇 |
-| **Docker** | 容器基础、镜像源配置、容器化部署实践 | 3 篇 |
-| **RabbitMQ** | 基础使用、高级特性（死信、延迟队列等） | 2 篇 |
-| **Kafka** | 消息队列基础与进阶 | 2 篇 |
-| **Zookeeper** | 分布式协调基础、使用指南 | 3 篇 |
-| **Dubbo** | RPC 框架基础与实践 | 2 篇 |
-| **MinIO** | 对象存储基础与使用 | 3 篇 |
-| **XXL-JOB** | 分布式任务调度 | 1 篇 |
-| **Nginx** | 部署配置与使用实践 | 2 篇 |
+### Java 后端路线
 
-### 1.6 设计模式
-
-23 种 GoF 设计模式全覆盖，按类型组织：
-
-| 分类 | 模式 |
-|------|------|
-| **创建型** | 单例模式、工厂模式、建造者模式、原型模式 |
-| **结构型** | 代理模式、适配器模式、装饰者模式、组合模式、桥接模式、享元模式、外观模式 |
-| **行为型** | 模板方法模式、策略模式、观察者模式、责任链模式、命令模式、状态模式、迭代器模式、备忘录模式、中介者模式、解释器模式、访问者模式 |
-
----
-
-## 二、web前端
-
-### 2.1 HTML / CSS / JavaScript 三件套
-
-| 模块 | 内容 | 笔记数量 |
-|------|------|----------|
-| **HTML** | HTML 基础语法与标签 | 1 篇 |
-| **CSS** | 选择器、盒模型、布局、动画、Less 预处理器 | 5 篇 |
-| **JavaScript** | 基础语法、进阶特性（原型链、闭包、异步编程等） | 4 篇（含丰富图解） |
-
-### 2.2 TypeScript / Node.js
-
-| 模块 | 内容 | 笔记数量 |
-|------|------|----------|
-| **TypeScript** | 类型系统、泛型、装饰器等 | 3 篇 |
-| **Node.js** | nvm 版本管理与环境配置 | 1 篇 |
-
-### 2.3 Vue 生态
-
-Vue 2 到 Vue 3 完整学习路径：
-
-| 内容 | 笔记数量 |
-|------|----------|
-| Vue 基础、基础进阶、生命周期、组件化开发、Vuex 状态管理、Vue3 新特性、Pinia 状态管理 | 7 篇（含大量图解） |
-
-### 2.4 其他前端技术
-
-| 模块 | 内容 | 笔记数量 |
-|------|------|----------|
-| **React** | React 基础入门 | 1 篇 |
-| **Electron** | Electron + Vue3 桌面开发、React/Vue3 快速集成 | 3 篇 |
-| **Uniapp** | 跨端开发基础、状态管理、登录与发布 | 3 篇 |
-| **工具链** | ESLint、Vite、Element-Plus、Axios | 4 篇 |
-
----
-
-## 三、Python 后端
-
-| 模块 | 内容 | 笔记数量 |
-|------|------|----------|
-| **FastAPI** | 现代 Python Web 框架 | 3 篇 |
-| **Flask** | 轻量级 Python Web 框架 | 3 篇 |
-| **Miniconda** | Python 环境管理工具 | 1 篇 |
-
----
-
-## 四、业务开发
-
-聚焦实际业务场景的解决方案与最佳实践：
-
-| 模块 | 内容 |
-|------|------|
-| **支付服务** | 支付相关技术实现与业务流程 |
-| **缓存服务** | 缓存技术在业务中的应用与优化 |
-| **MyBatis 操作多数据库** | MyBatis 多数据源配置与实战 |
-| **SpringBoot-Starter 开发** | 自定义 Starter 的设计与实现 |
-
----
-
-## 项目价值
-
-1. **全栈覆盖**：从 Java 到 Python，从后端到前端，从数据库到中间件，全方位覆盖全栈技术体系。
-
-2. **系统性强**：内容按技术领域和难度层级系统化组织，从基础入门到高级进阶，形成完整的知识体系。
-
-3. **实战导向**：大量"项目集成"、"快速集成"、"实战部署"类笔记，可直接应用于实际开发。
-
-4. **图解丰富**：MySQL、JVM、Vue、JavaScript 等模块均配有大量图解说明，降低理解门槛。
-
-5. **前沿技术**：包含 Spring AI、LangChain4j 等 AI 集成技术，紧跟技术发展潮流。
-
-6. **设计模式全覆盖**：23 种 GoF 设计模式完整笔记，助力代码设计能力提升。
-
-## 学习路径建议
-
-### 初学者路线
-
-```
-HTML/CSS → JavaScript → TypeScript → Vue/React → Node.js
-       ↓
-Java基础 → MySQL → Spring → SpringBoot → MyBatis
-       ↓
-Git/Maven → Linux → Docker → Redis → 中间件
+```text
+Java 基础
+  -> 集合 / IO / 反射 / 注解
+  -> 多线程 / JUC / JVM
+  -> MySQL / Redis
+  -> Spring / SpringMVC / SpringBoot
+  -> MyBatis / Maven / Git
+  -> Docker / Linux / Nginx
+  -> RabbitMQ / Kafka / Dubbo / SpringCloud
+  -> 设计模式
+  -> 业务开发实践
 ```
 
-### Java 后端深入路线
+### 前端路线
 
-```
-Java基础(集合/JUC/JVM) → 数据库(MySQL/Redis/MongoDB) 
-→ Spring全家桶(Spring/SpringMVC/SpringBoot/SpringCloud) 
-→ 中间件(RabbitMQ/Kafka/Dubbo/Nginx) 
-→ 设计模式 → 业务实战
-```
-
-### 前端深入路线
-
-```
-HTML/CSS/JavaScript → TypeScript → Vue2 → Vue3+Pinia 
-→ Uniapp → Electron → 工具链(ESLint/Vite/Axios)
+```text
+HTML / CSS
+  -> JavaScript
+  -> TypeScript
+  -> Vue 或 React
+  -> Pinia / Vuex / Axios / Element Plus
+  -> Vite / ESLint
+  -> Uniapp 或 Electron
 ```
 
-### Python 后端路线
+### Python / AI Agent 路线
 
+```text
+Python 环境管理
+  -> uv / Miniconda
+  -> RAG 基础
+  -> Agent 工程
+  -> LangGraph
+  -> MCP 与工具协议
+  -> 工程化部署与可观测性
 ```
-Python基础 → Flask → FastAPI → 数据库集成
+
+### 面试复习路线
+
+```text
+Java 核心基础
+  -> JVM / JUC
+  -> MySQL
+  -> Redis
+  -> SpringBoot / SpringCloud
+  -> 项目业务复盘
+  -> 实习经历整理
 ```
+
+## 使用方式
+
+推荐使用 Obsidian 打开本仓库：
+
+1. 克隆或下载仓库。
+2. 使用 Obsidian 打开 `QStack` 目录。
+3. 按目录模块阅读，也可以通过 Obsidian 全文搜索定位具体知识点。
+4. 对包含图片资源的笔记，建议保持原目录结构，避免图片链接失效。
+
+如果只需要阅读 Markdown，也可以直接使用 VS Code、Typora 或其他 Markdown 编辑器打开。
+
+## 适合人群
+
+- 正在系统学习 Java 后端或全栈开发的学习者。
+- 需要整理 Spring、数据库、中间件、前端框架知识体系的开发者。
+- 准备 Java / 后端 / 全栈方向面试的求职者。
+- 希望沉淀业务开发方案、AI 工具使用经验和工程化实践的个人开发者。
+
+## 维护说明
+
+- 笔记按技术方向和学习阶段分层存放。
+- 图片资源通常放在对应目录下的 `img`、`assets` 等子目录中。
+- `web后端/设计模式代码` 是 Maven 示例工程，可单独作为代码示例查看。
+- 新增笔记时建议沿用当前编号和目录命名风格，便于长期维护和检索。
+
+## 仓库定位
+
+QStack 的目标不是替代官方文档，而是把日常学习、项目实践、问题排查和面试复习沉淀成一个可持续扩展的个人技术知识库。
