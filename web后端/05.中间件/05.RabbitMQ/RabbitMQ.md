@@ -43,15 +43,15 @@
 
 MQ，中文是消息队列（MessageQueue），字面来看就是存放消息的队列。
 
-|                          | **RabbitMQ**                   | **ActiveMQ**                   | **RocketMQ** | **Kafka**  |
-| ------------------------ | ------------------------------ | ------------------------------ | ------------ | ---------- |
-| 公司/社区                | Rabbit                         | Apache                         | 阿里         | Apache     |
-| 开发语言                 | Erlang                         | Java                           | Java         | Scala&Java |
-| 协议支持                 | AMQP，XMPP，SMTP，STOMP        | OpenWire,STOMP，REST,XMPP,AMQP | 自定义协议   | 自定义协议 |
-| 可用性                   | 高                             | 一般                           | 高           | 高         |
-| 单机吞吐量               | 一般                           | 差                             | 高           | 非常高     |
-| 消息延迟                 | 微秒级                         | 毫秒级                         | 毫秒级       | 毫秒以内   |
-| 消息可靠性               | 高                             | 一般                           | 高           | 一般       |
+|       | **RabbitMQ**         | **ActiveMQ**                  | **RocketMQ** | **Kafka**  |
+| ----- | -------------------- | ----------------------------- | ------------ | ---------- |
+| 公司/社区 | Rabbit               | Apache                        | 阿里           | Apache     |
+| 开发语言  | Erlang               | Java                          | Java         | Scala&Java |
+| 协议支持  | AMQP，XMPP，SMTP，STOMP | OpenWire,STOMP，REST,XMPP,AMQP | 自定义协议        | 自定义协议      |
+| 可用性   | 高                    | 一般                            | 高            | 高          |
+| 单机吞吐量 | 一般                   | 差                             | 高            | 非常高        |
+| 消息延迟  | 微秒级                  | 毫秒级                           | 毫秒级          | 毫秒以内       |
+| 消息可靠性 | 高                    | 一般                            | 高            | 一般         |
 
 **选择建议**：
 - 追求可用性：Kafka、RocketMQ、RabbitMQ
