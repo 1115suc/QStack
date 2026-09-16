@@ -1,16 +1,17 @@
 # QStack
 
-QStack 是一个以 Obsidian Markdown 组织的全栈开发学习笔记库，内容覆盖 Java 后端、Web 前端、Python / AI Agent、业务开发实践与面试复习。仓库更偏向知识库和长期沉淀，不是单一可运行项目。
+QStack 是一个以 Obsidian Markdown 组织的全栈开发学习笔记库，内容覆盖 Java 后端、Web 前端、Python / AI Agent、算法与数据结构、业务开发实践与面试复习。仓库更偏向知识库和长期沉淀，不是单一可运行项目。
 
 ## 内容概览
 
 | 模块 | 说明 | 笔记数量 |
 | --- | --- | ---: |
 | `web后端` | Java、数据库、Spring 体系、工具框架、中间件、设计模式与示例代码 | 146 |
-| `web前端` | HTML、CSS、JavaScript、TypeScript、Node.js、Vue、React、Electron、Uniapp 与前端工具链 | 32 |
-| `python` | Python 基础环境、Miniconda / uv、FastAPI / Flask、AI Agent、RAG、LangGraph、MCP 等 | 29 |
+| `web前端` | HTML、CSS、JavaScript、TypeScript、Node.js、Vue、React、Electron、Uniapp 与前端工具链 | 35 |
+| `python` | Python 基础环境、Miniconda / uv、FastAPI / Flask、AI Agent、RAG、LangGraph、MCP 等 | 32 |
+| `算法笔记` | 数据结构、算法周记、Hot100 / LeetCode 代码与 SQL 刷题 | 13 |
 | `业务开发` | 支付服务、缓存服务、多数据源、Starter 开发、前端工程化、AI 工具使用 | 7 |
-| `面试笔记` | Java、MySQL、实习经历与面试复盘 | 42 |
+| `面试笔记` | Java、MySQL 面试复习 | 2 |
 
 ## 目录结构
 
@@ -63,6 +64,11 @@ QStack/
 │   ├── Agent/
 │   ├── python/
 │   └── 中间件/
+├── 算法笔记/
+│   ├── DemoCode/
+│   ├── DemoSQL/
+│   ├── 数据结构/
+│   └── 算法/
 ├── 业务开发/
 │   ├── AI 工具使用/
 │   ├── MyBatis 操作多数据库/
@@ -72,8 +78,7 @@ QStack/
 │   └── 缓存服务/
 └── 面试笔记/
     ├── 01.Java篇/
-    ├── 02.MySQL/
-    └── 实习笔记/
+    └── 02.MySQL/
 ```
 
 ## 核心模块
@@ -104,7 +109,15 @@ QStack/
 `python` 模块包含 Python 环境管理和 AI 应用开发相关内容。
 
 - Python 环境：pip 镜像源、Miniconda、uv。
-- Agent 方向：RAG 工程、Agent 工程、LangGraph、MCP 与工具协议、工程化部署与可观测性、项目实战与面试。
+- Agent 方向：RAG 工程、Agent 工程、LangGraph、MCP 与工具协议、工程化部署与可观测性、项目实战与面试、DrissionPage。
+
+### 算法笔记
+
+`算法笔记` 用于沉淀数据结构和刷题过程，包含笔记与可运行代码。
+
+- 数据结构：动态数组、链表、递归、二分查找。
+- 算法周记：快排 / 归并 / 二分、前缀和 / 差分、双指针 / 位运算 / 离散化 / 区间合并。
+- 刷题代码：`DemoCode` 中的 Hot100、LeetCode Java 题解，以及 `DemoSQL` 中的 SQL 刷题笔记。
 
 ### 业务开发
 
@@ -119,7 +132,7 @@ QStack/
 
 ### 面试笔记
 
-`面试笔记` 用于沉淀面试高频知识点、实习记录和复盘材料，当前包含 Java、MySQL 与实习笔记相关内容。
+`面试笔记` 用于沉淀面试高频知识点，当前仓库中包含 Java 与 MySQL 相关内容。
 
 ## 推荐学习路线
 
@@ -162,6 +175,17 @@ Python 环境管理
   -> 工程化部署与可观测性
 ```
 
+### 算法路线
+
+```text
+动态数组 / 链表
+  -> 递归 / 二分查找
+  -> 快排 / 归并
+  -> 前缀和 / 差分
+  -> 双指针 / 位运算 / 离散化 / 区间合并
+  -> Hot100 / LeetCode / SQL 刷题
+```
+
 ### 面试复习路线
 
 ```text
@@ -171,7 +195,6 @@ Java 核心基础
   -> Redis
   -> SpringBoot / SpringCloud
   -> 项目业务复盘
-  -> 实习经历整理
 ```
 
 ## 使用方式
@@ -197,6 +220,7 @@ Java 核心基础
 - 笔记按技术方向和学习阶段分层存放。
 - 图片资源通常放在对应目录下的 `img`、`assets` 等子目录中。
 - `web后端/设计模式代码` 是 Maven 示例工程，可单独作为代码示例查看。
+- `算法笔记/DemoCode` 是 Java 刷题示例工程，可单独编译运行。
 - 新增笔记时建议沿用当前编号和目录命名风格，便于长期维护和检索。
 
 ## 仓库定位
